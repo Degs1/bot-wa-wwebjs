@@ -275,18 +275,20 @@ async function Stickmeme(msg, client) {
 
 async function updateFileFromGithub(githubRawUrl,msg,folder) {
     try {
-      const response = await axios.get(githubRawUrl);
+        const response = await axios.get(githubRawUrl, { responseType: 'text' });
       
       let fileName;
       if (folder == '1') {
-        fileName = '/lib/' + path.basename(githubRawUrl); // ambil nama file dari URL
+        fileName = './lib/' + path.basename(githubRawUrl); // ambil nama file dari URL
+      } else if (folder == '2') {
+        fileName = './plugins/' + path.basename(githubRawUrl); // ambil nama file dari URL
       } else {
-        fileName = '/plugins/' + path.basename(githubRawUrl); // ambil nama file dari URL
+        fileName = './' + path.basename(githubRawUrl); // ambil nama file dari URL
       }
       
       fs.writeFileSync(fileName, response.data);
   
-      msg.reply(`✅ File "${fileName}" berhasil diupdate.`);
+      msg.reply(`✅ File "${fileName}" berhasil diupdate. silahkan restart dengan !restart`);
       console.log(`✅ File "${fileName}" berhasil diupdate.`);
     } catch (err) {
         msg.reply('❌ Gagal mengupdate file:', err.message);
@@ -504,11 +506,6 @@ _Partner/helper :_ *ChatGpt 4.0*
 *Support*
 _Tiktok :_ *@el.llose*
 
-*Changelogs*
-_Added Important Feature_ *- new feature*
-_Added Sholat reminder_ *- add reminder in groups*
-_Added ${prefix}tagall_ *- mention all member in groups*
-
 📌 *Berikut adalah daftar cmd*
 
 *_~🚧 Important Feature~_*
@@ -723,7 +720,7 @@ client.on('message', async msg => {
             await msg.reply("Bot will restart in 5 second")
             await sleepp(5000)
             await msg.reply("restartting...")
-            process.exit(0);
+            await process.exit(0);
         }
     }
 
@@ -846,7 +843,7 @@ client.on('message', async msg => {
         await downloadPlugin(msg, url, type, client)
     }
 
-    if (msg.body.startsWith(`${prefix}help`)) {
+    if (msg.body.startsWith(`.help`) || msg.body.startsWith(`,help`) || msg.body.startsWith(`${prefix}help`) || msg.body.startsWith(`!help`)) {
         await client.sendMessage(msg.from, help_banner, { caption: list_help });
     }
 
