@@ -1,0 +1,31 @@
+{
+  "groups": [
+    {
+      "name": "Test2",
+      "id": "120363391907395177@g.us",
+      "izintag": false,
+      "adminList": [
+        ""
+      ]
+    },
+    {
+      "name": "PADIL STORE",
+      "id": "120363047796847448@g.us",
+      "izintag": false,
+      "adminList": [
+        "",
+        "62895326028680@c.us",
+        "62895402300207@c.us"
+      ]
+    },
+    {
+      "name": "test",
+      "id": "120363409798501476@g.us",
+      "izintag": false,
+      "adminList": [
+        "",
+        "6282155355635@c.us"
+      ]
+    }
+  ]
+}
