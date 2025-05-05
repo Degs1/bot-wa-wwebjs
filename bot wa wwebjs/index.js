@@ -505,70 +505,6 @@ function getDatetime() {
     return { hari: hariIni, date: Datenow, time: Timenow }
 }
 
-const list_help = `
-╭ *• INFO - BOT*
-│ *° Name:* DegsBOT
-│ *° Version:* 0.1
-│ *° Language:* Js (Javascript)
-╰──── ୨୧ ────┈
-
-╭ *• INFO - Today*
-│ *° Time:* ${getDatetime().time}
-│ *° Day:* ${getDatetime().hari}
-│ *° Date:* ${getDatetime().date}
-╰──── ୨୧ ────┈
-
-╭ *• INFO - Symbol*
-│ *° ⛔:* Only owner in database
-│ *° ‼️:* Only admin in database
-│ *° ✅:* All user can use
-╰──── ୨୧ ────┈
-
-͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏
-╭──── ⌞ *Importan Menu* ⌝
-╰┈➤ *✅ ${prefix}tagall <pesan>*
-
-
-╭──── ⌞ *Ai Menu* ⌝
-│┈➤ *✅ ${prefix}ask <tanya>*
-│┈➤ *✅ ${prefix}facehd*
-│┈➤ *✅ ${prefix}hdin <type>*
-╰┈➤ *✅ ${prefix}removebg*
-
-╭──── ⌞ *Game Menu* ⌝
-│┈➤ *✅ ${prefix}listgame*
-│┈➤ *✅ ${prefix}susunkata* 
-│┈➤ *✅ ${prefix}tebakgambbar*
-╰┈➤ *✅ ${prefix}ramalcinta*
-
-╭──── ⌞ *Sticker Menu* ⌝
-│┈➤ *✅ ${prefix}mstick <text>*
-╰┈➤ *✅ ${prefix}smeme <up>|<down>*
-
-╭──── ⌞ *BMKG Menu* ⌝
-│┈➤ *✅ ${prefix}infogempa*
-│┈➤ *✅ ${prefix}gempaterkini*
-╰┈➤ *✅ ${prefix}cuaca <daerah>*
-
-╭──── ⌞ *Downloader Menu* ⌝
-│┈➤ *✅ ${prefix}get tt <link>*
-╰┈➤ *✅ ${prefix}get ig <link>*
-
-╭──── ⌞ *Reminder Menu* ⌝
-│┈➤ *‼️ ${prefix}sholatreminder*
-╰┈➤ *‼️ ${prefix}remsholatreminder*
-
-╭──── ⌞ *Admin Section* ⌝
-│┈➤ *‼️ !antitoxic*
-╰┈➤ *‼️ !izintag*
-
-╭──── ⌞ *Owner Section* ⌝
-│┈➤ *⛔ !bc <pesan>*
-│┈➤ *⛔ !addadmin*
-│┈➤ *⛔ !update*
-│┈➤ *⛔ !restart*
-╰──── ୨୧ ────┈
-`;
 
 let help_banner = await MessageMedia.fromFilePath("./config/banner.jpg");
 let anti_toxicvar=false;
@@ -622,6 +558,12 @@ client.on('message', async msg => {
         if (findId.adminList.includes(msg.author || msg.from)) {
             adminHere=true;
         }
+    }
+    
+    if (chatt.isGroup) {
+        const senderId = msg.author || msg.from;
+        const isAdmin = await chatt.isAdmin(senderId);
+        adminHere=true;
     }
 
     if (chatt.isGroup) {
@@ -728,7 +670,7 @@ client.on('message', async msg => {
             if (urls) {
                 await updateFileFromGithub(urls,msg,folder);
             } else {
-                msg.reply("format:\n\n!update 1 <link>\n\n1 for lib\n0 for plugins")
+                msg.reply("format:\n\n!update 1 <link>\n\n1 for lib\n2 for plugins\n0 for index")
             }
         } else {
             msg.reply("you not allowed use this cmd")
@@ -864,6 +806,70 @@ client.on('message', async msg => {
     }
 
     if (msg.body.startsWith(`.help`) || msg.body.startsWith(`,help`) || msg.body.startsWith(`${prefix}help`) || msg.body.startsWith(`!help`)) {
+        const list_help = `
+╭ *• INFO - BOT*
+│ *° Name:* DegsBOT
+│ *° Version:* 0.1
+│ *° Language:* Js (Javascript)
+╰──── ୨୧ ────┈
+
+╭ *• INFO - Today*
+│ *° Time:* ${getDatetime().time}
+│ *° Day:* ${getDatetime().hari}
+│ *° Date:* ${getDatetime().date}
+╰──── ୨୧ ────┈
+
+╭ *• INFO - Symbol*
+│ *° ⛔:* Only owner in database
+│ *° ‼️:* Only admin in database
+│ *° ✅:* All user can use
+╰──── ୨୧ ────┈
+
+͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏
+╭──── ⌞ *Importan Menu* ⌝
+╰┈➤ *✅ ${prefix}tagall <pesan>*
+
+
+╭──── ⌞ *Ai Menu* ⌝
+│┈➤ *✅ ${prefix}ask <tanya>*
+│┈➤ *✅ ${prefix}facehd*
+│┈➤ *✅ ${prefix}hdin <type>*
+╰┈➤ *✅ ${prefix}removebg*
+
+╭──── ⌞ *Game Menu* ⌝
+│┈➤ *✅ ${prefix}listgame*
+│┈➤ *✅ ${prefix}susunkata* 
+│┈➤ *✅ ${prefix}tebakgambbar*
+╰┈➤ *✅ ${prefix}ramalcinta*
+
+╭──── ⌞ *Sticker Menu* ⌝
+│┈➤ *✅ ${prefix}mstick <text>*
+╰┈➤ *✅ ${prefix}smeme <up>|<down>*
+
+╭──── ⌞ *BMKG Menu* ⌝
+│┈➤ *✅ ${prefix}infogempa*
+│┈➤ *✅ ${prefix}gempaterkini*
+╰┈➤ *✅ ${prefix}cuaca <daerah>*
+
+╭──── ⌞ *Downloader Menu* ⌝
+│┈➤ *✅ ${prefix}get tt <link>*
+╰┈➤ *✅ ${prefix}get ig <link>*
+
+╭──── ⌞ *Reminder Menu* ⌝
+│┈➤ *‼️ ${prefix}sholatreminder*
+╰┈➤ *‼️ ${prefix}remsholatreminder*
+
+╭──── ⌞ *Admin Section* ⌝
+│┈➤ *‼️ !antitoxic*
+╰┈➤ *‼️ !izintag*
+
+╭──── ⌞ *Owner Section* ⌝
+│┈➤ *⛔ !bc <pesan>*
+│┈➤ *⛔ !addadmin*
+│┈➤ *⛔ !update*
+│┈➤ *⛔ !restart*
+╰──── ୨୧ ────┈
+`;
         await client.sendMessage(msg.from, help_banner, { caption: list_help });
     }
 
