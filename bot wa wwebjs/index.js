@@ -560,10 +560,22 @@ client.on('message', async msg => {
     //    }
   //  }
     
+//    if (chatt.isGroup) {
+//        const senderId = msg.author;
+   //     const SendisAdmin = await chatt.isAdmin(senderId);
+//        if (SendisAdmin) {
+  //          adminHere=true;
+//        }
+//    }
+
     if (chatt.isGroup) {
-        const senderId = msg.author || msg.from;
-        const isAdmin = await chatt.isAdmin(senderId);
-        adminHere=true;
+    const senderId = msg.author; // fallback kalau bukan grup
+    const senderIsAdmin = chatt.participants
+        .find(p => p.id._serialized === senderId)?.isAdmin;
+
+    if (senderIsAdmin) {
+        adminHere = true;
+    }
     }
 
     if (chatt.isGroup) {
