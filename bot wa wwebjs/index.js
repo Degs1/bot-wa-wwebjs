@@ -554,11 +554,11 @@ client.on('message', async msg => {
         ownerhere = true;
     }
 
-    if (findId) {
-        if (findId.adminList.includes(msg.author || msg.from)) {
-            adminHere=true;
-        }
-    }
+   // if (findId) {
+    //    if (findId.adminList.includes(msg.author || msg.from)) {
+     //       adminHere=true;
+    //    }
+  //  }
     
     if (chatt.isGroup) {
         const senderId = msg.author || msg.from;
