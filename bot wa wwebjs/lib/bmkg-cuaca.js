@@ -17,7 +17,7 @@ export default async function Cuacacek(lokasi, msg) {
 
         let pesan = `*[Prakiraan Cuaca]*\n\n`;
         pesan += `🏙 *${lokasiPilihan.lokasi.kotkab}, ${lokasiPilihan.lokasi.provinsi}*\n📍 Kecamatan: ${lokasiPilihan.lokasi.kecamatan}\n\n`;
-
+        await msg.reply(lokasiPilihan.cuaca)
         // Looping hanya data cuaca yang sesuai jam 08, 14, 20
         lokasiPilihan.cuaca.flat().forEach(cuaca => {
        //     const jam = cuaca.local_datetime.split(' ')[1].split(':')[0];
