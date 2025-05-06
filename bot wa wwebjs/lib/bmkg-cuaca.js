@@ -20,8 +20,8 @@ export default async function Cuacacek(lokasi, msg) {
         await msg.reply(lokasiPilihan.cuaca)
         // Looping hanya data cuaca yang sesuai jam 08, 14, 20
         lokasiPilihan.cuaca.flat().forEach(cuaca => {
-       //     const jam = cuaca.local_datetime.split(' ')[1].split(':')[0];
-            const jam = cuaca.local_datetime.split('T')[1].split(':')[0];  
+            const jam = cuaca.local_datetime.split(' ')[1].split(':')[0];
+           // const jam = cuaca.local_datetime.split('T')[1].split(':')[0];  
 
             if (["06", "15", "21"].includes(jam)) {
                 pesan += `*🕒 ${cuaca.local_datetime}*\n`;
