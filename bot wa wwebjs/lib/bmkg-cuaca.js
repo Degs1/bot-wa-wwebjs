@@ -23,7 +23,7 @@ export default async function Cuacacek(lokasi, msg) {
             const jam = cuaca.local_datetime.split(' ')[1].split(':')[0];
            // const jam = cuaca.local_datetime.split('T')[1].split(':')[0];  
 
-            if (["06", "15", "21"].includes(jam)) {
+            if (["08", "14", "20"].includes(jam)) {
                 pesan += `*🕒 ${cuaca.local_datetime}*\n`;
                 pesan += `🌤 Cuaca: ${cuaca.weather_desc}\n`;
                 pesan += `🌡 Suhu: ${cuaca.t}°C\n`;
