@@ -41,6 +41,6 @@ export default async function Cuacacek(lokasi, msg) {
         msg.reply(pesan);
     } catch (error) {
         console.error('Error mengambil data cuaca:', error);
-        msg.reply('Terjadi kesalahan mengambil data cuaca.');
+        msg.reply('Terjadi kesalahan mengambil data cuaca.',error);
     }
 };
