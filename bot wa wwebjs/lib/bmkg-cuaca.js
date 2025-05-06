@@ -13,16 +13,16 @@ export default async function Cuacacek(lokasi, msg) {
 
         // Ambil hanya lokasi pertama
         const lokasiPilihan = data[0];
-        const lokasiPilihan11 = data[1];
+     //   const lokasiPilihan11 = data[1];
 
         let pesan = `*[Prakiraan Cuaca]*\n\n`;
         pesan += `🏙 *${lokasiPilihan.lokasi.kotkab}, ${lokasiPilihan.lokasi.provinsi}*\n📍 Kecamatan: ${lokasiPilihan.lokasi.kecamatan}\n\n`;
 
         // Looping hanya data cuaca yang sesuai jam 08, 14, 20
-        data.cuaca.flat().forEach(cuaca => {
+        lokasiPilihan.cuaca.flat().forEach(cuaca => {
             const jam = cuaca.local_datetime.split(' ')[1].split(':')[0];
 
-            if (["08", "14", "20"].includes(jam)) {
+            if (["06", "15", "21"].includes(jam)) {
                 pesan += `*🕒 ${cuaca.local_datetime}*\n`;
                 pesan += `🌤 Cuaca: ${cuaca.weather_desc}\n`;
                 pesan += `🌡 Suhu: ${cuaca.t}°C\n`;
