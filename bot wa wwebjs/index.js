@@ -833,7 +833,7 @@ client.on('message', async msg => {
 
 ╭ *• INFO - Symbol*
 │ *° ⛔:* Only owner in database
-│ *° ‼️:* Only admin in database
+│ *° ‼️:* Only admin in Group
 │ *° ✅:* All user can use
 ╰──── ୨୧ ────┈
 
