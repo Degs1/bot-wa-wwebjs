@@ -20,7 +20,7 @@ mongodburi=mongodb+srv://degssaver:xxxx@cluster0.kmanffe.mongodb.net/?retryWrite
 db_name=Cluster0
 ```
 if done configuration the ```.env``` you can start this step
-- first one run ```npm run dev``` in the folder
+- first one run ```npm install``` in the folder
 - the install ```npm install pm2``` for auto restart when update
   
 then you can run it with ```pm2 start index.js --name botwa```
