@@ -29,6 +29,7 @@ import { MongoClient } from 'mongodb';
 import { clearScreenDown } from 'readline';
 import { sleep } from 'openai/core.mjs';
 import moment from 'moment-timezone';
+import { stringify } from 'querystring';
 //import { startTebakGambar, startSusunKata, checkAnswer} from './mode/gameHandler';
 let gameSessions = {}; // Menyimpan sesi game
 let prefix = process.env.prefix
@@ -650,6 +651,27 @@ client.on('message', async msg => {
         }
     }
 
+    if (msg.body.startsWith("!antidelete")) {
+        if (chatt.isGroup) {
+            if (ownerhere || adminHere) {
+                if (findId) {
+                    if (findId.antidelete) {
+                        findId.antidelete=false;
+                        msg.reply("anti delete di matikan")
+                    } else {
+                        findId.antidelete=true;
+                        msg.reply("anti delete dinyalakan")
+                    }
+                }
+                await fs.writeFileSync('./lib/grup-daftar.json', JSON.stringify(dataGrup, null, 2));
+            } else {
+                msg.reply('you are not admin or owner in database pls tell the owner')
+            }
+        } else {
+            msg.reply('plese use this cmd in your group')
+        }
+    }
+
     if (msg.body.startsWith('!addadmin')) {
         let user = msg.body.slice(11).trim();
 
@@ -821,7 +843,7 @@ client.on('message', async msg => {
         const list_help = `
 ╭ *• INFO - BOT*
 │ *° Name:* DegsBOT
-│ *° Version:* 0.1
+│ *° Version:* 0.2
 │ *° Language:* Js (Javascript)
 ╰──── ୨୧ ────┈
 
@@ -833,12 +855,13 @@ client.on('message', async msg => {
 
 ╭ *• INFO - Symbol*
 │ *° ⛔:* Only owner in database
-│ *° ‼️:* Only admin in Group
+│ *° ‼️:* Only admin in database
 │ *° ✅:* All user can use
 ╰──── ୨୧ ────┈
 
 ͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏
 ╭──── ⌞ *Importan Menu* ⌝
+│┈➤ *‼️ ${prefix}antidelete*
 ╰┈➤ *✅ ${prefix}tagall <pesan>*
 
 
@@ -927,10 +950,28 @@ client.on('message', async msg => {
             msg.reply("you not allowed to use this cmd")
         }
     }
+
+    if (msg.body.startsWith(`${prefix}getimg`) && msg.hasQuotedMsg) {
+        const quotedMsg = await msg.getQuotedMessage();
+        if (quotedMsg.hasMedia) {
+            const media = await quotedMsg.downloadMedia();
+            if (media.mimetype.startsWith('image/')) {
+                await msg.reply('gambar');
+            }
+        }
+        return;
+    }
 });
 
 
-
+client.on('message_revoke_everyone', async (msg,revoked_msg) => {
+    console.log(`Msg DELETED : ${revoked_msg.body}`)
+    let dataGrup = getAllowedGroups();
+    let findId = dataGrup.groups.find(g => g.id === revoked_msg.id.remote);
+    if (findId.antidelete) {
+        await msg.reply(`‼️Anti DELETE\n\n*PESAN:* ${revoked_msg.body}\n*DARI:* \u200B@${revoked_msg._data.notifyName}\n*TYPE:* ${revoked_msg.type}`)
+    }
+});
 
 
 // Jalankan bot
