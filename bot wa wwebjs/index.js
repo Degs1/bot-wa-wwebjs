@@ -3,13 +3,11 @@ const { Client, LocalAuth, MessageMedia, Buttons} = pkg;
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import * as dotenv from "dotenv";
 dotenv.config();
-import { createCanvas } from 'canvas';
 import { Sticker, createSticker } from 'wa-sticker-formatter';
 import * as fs from 'fs';
 import * as path from 'path';
 import axios from 'axios';
 import FormData from 'form-data';
-import enhancePlugin from './plugins/enhance-plugin.js';
 import qrcode from 'qrcode-terminal';
 const fromBuffer = async (buffer) => {
     const { fileTypeFromBuffer } = await import('file-type');
@@ -26,10 +24,8 @@ import { sendGempaTerkini, sendInfoGempa } from './lib/bmkg-gempa.js';
 import sendRamalanCinta from './lib/ramalan-cinta.js';
 import cekWaktuSholat from './plugins/sholat-reminder.js';
 import { MongoClient } from 'mongodb';
-import { clearScreenDown } from 'readline';
-import { sleep } from 'openai/core.mjs';
 import moment from 'moment-timezone';
-import { stringify } from 'querystring';
+import { find } from 'linkifyjs';
 //import { startTebakGambar, startSusunKata, checkAnswer} from './mode/gameHandler';
 let gameSessions = {}; // Menyimpan sesi game
 let prefix = process.env.prefix
@@ -48,7 +44,11 @@ const dbName = process.env.db_name
 const cldb = new MongoClient(uri);
 // Inisialisasi WhatsApp bot
 const client = new Client({
-    authStrategy: new LocalAuth()
+    
+    authStrategy: new LocalAuth(),
+    puppeteer: {
+        executablePath: 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
+    }
 });
 
 client.on('qr', qr => {
@@ -107,18 +107,18 @@ async function createTextSticker(msg, client) {
     const command = msg.body.toLowerCase();
     if (!command.startsWith(`${prefix}mstick`)) return;
     
-    const text = msg.body.slice(8).trim();
-    if (!msg.body.slice(7).trim() === "") return msg.reply("⚠ Masukkan teks untuk stiker! Contoh: !mstick Sigma Sigma Boy");
+    const text = msg.body.replace(`${prefix}mstick `,'');
+    if (text === "") return msg.reply("⚠ Masukkan teks untuk stiker! Contoh: !mstick Sigma Sigma Boy");
 
     console.log("📌 Memproses perintah !mstick...");
-    const filePath = "./temp/sticker.jpeg";
     let stick64 = await brat(msg,text);
     //let stick644 = await stick64.base64;
 
     if (!stick64.status === 200) return msg.reply("⚠ Gagal membuat stiker, coba lagi.");
     // **Buat stiker**
     try {
-        const sticker = await new Sticker(filePath, {
+        const buffer = Buffer.from(stick64.data, "base64");
+        const sticker = await new Sticker(buffer, {
             pack: "Bot Stickers",
             author: "Degs a.k.a akbar",
             type: "full",
@@ -133,7 +133,6 @@ async function createTextSticker(msg, client) {
         await client.sendMessage(msg.from, media, { sendMediaAsSticker: true });
 
         console.log("✅ Stiker berhasil dikirim!");
-        fs.unlinkSync(filePath);
     } catch (error) {
         console.error("❌ Error saat membuat/mengirim stiker:", error);
         msg.reply("⚠ Gagal membuat stiker, coba lagi.");
@@ -238,11 +237,11 @@ async function Stickmeme(msg, client) {
     
     //const text = msg.body.slice(8).trim();
 
-    const args = msg.body.split(" ").slice(1).join(" ").split("|").map(a => a.trim());
+    const args = msg.body.split(" ").slice(1).join(" ").split(":").map(a => a.trim());
 
     const teks1 = args[0] ? args[0] : "‎"; // Karakter spasi kosong (Invisible Character)
     const teks2 = args[1] ? args[1] : "‎";
-    if (msg.body.slice(7).trim() === "") return msg.reply("⚠ Masukkan teks untuk stiker! Contoh: !mstick Sigma Sigma Boy");
+    if (msg.body.replace(`${prefix}smeme`,'') === '') return msg.reply(`⚠ Masukkan teks untuk stiker! Contoh: ${prefix}smeme textUp:TextDown`);
 
     console.log("📌 Memproses perintah !smeme...");
     let stick64 = await smemeget(msg, teks1, teks2, client);
@@ -798,7 +797,7 @@ client.on('message', async msg => {
     const text = msg.body.toLowerCase();
 
     if (text === `${prefix}listgame`) {
-        await client.sendMessage(chatId, "📜 Menu: \n1️⃣ *!tebakgambar*\n2️⃣ *!susunkata*");
+        await client.sendMessage(chatId, `📜 Menu: \n1️⃣ *!tebakgambar*\n2️⃣ *!susunkata*`);
     } else if (text === `${prefix}tebakgambar`) {
         if (gameSessions[chatId]) {
             await client.sendMessage(chatId, "⚠️ Game berlangsung, (!menyerah) untuk memulai game baru")
@@ -834,9 +833,12 @@ client.on('message', async msg => {
     }
     
     if (msg.body.startsWith(`${prefix}get`)) {
-        const type = msg.body.slice(5).trim().slice(0, 2).toLowerCase();
-        const url = msg.body.slice(8).trim();
-        await downloadPlugin(msg, url, type, client)
+        if (msg.hasQuotedMsg) {
+            const text = await msg.getQuotedMessage();
+            const link = find(text.body,{type: 'url'})[0].href
+            const type = msg.body.replace(`${prefix}get`,'').toLowerCase();
+            await downloadPlugin(msg, link, type, client)
+        } else return msg.reply(`please reply the link with cmd\n\n${prefix}get tt (for tiktok)\n${prefix}get ig (for instagram)`)
     }
 
     if (msg.body.startsWith(`.help`) || msg.body.startsWith(`,help`) || msg.body.startsWith(`${prefix}help`) || msg.body.startsWith(`!help`)) {
@@ -965,11 +967,20 @@ client.on('message', async msg => {
 
 
 client.on('message_revoke_everyone', async (msg,revoked_msg) => {
-    console.log(`Msg DELETED : ${revoked_msg.body}`)
+    console.log(`Msg DELETED : ${JSON.stringify(revoked_msg)}`)
     let dataGrup = getAllowedGroups();
     let findId = dataGrup.groups.find(g => g.id === revoked_msg.id.remote);
     if (findId.antidelete) {
-        await msg.reply(`‼️Anti DELETE\n\n*PESAN:* ${revoked_msg.body}\n*DARI:* \u200B@${revoked_msg._data.notifyName}\n*TYPE:* ${revoked_msg.type}`)
+        const media = new MessageMedia(
+            'image/jpeg',                  // mime type
+            revoked_msg._data.body,                   // base64 string (tanpa prefix data:)
+            'image.jpeg'                   // nama file
+        );
+        if (revoked_msg._data.mimetype == 'image/jpeg' || revoked_msg._data.mimetype == 'image/png') {
+            await client.sendMessage(msg.from,media,{ caption: `‼️Anti DELETE\n\n*PESAN:* ${revoked_msg.body}\n*DARI:* \u200B@${revoked_msg._data.notifyName}\n*TYPE:* ${revoked_msg.type}` })
+        } else {
+            await msg.reply(`‼️Anti DELETE\n\n*PESAN:* ${revoked_msg.body}\n*DARI:* \u200B@${revoked_msg._data.notifyName}\n*TYPE:* ${revoked_msg.type}`)
+        }
     }
 });
 
