@@ -3,13 +3,10 @@ import pkg from 'whatsapp-web.js';
 const { Client, LocalAuth, MessageMedia } = pkg;
 import downloadvid from '../lib/video-download.js';
 import fetch from 'node-fetch';
-import { promisify } from 'util';
-const sleep = promisify(setTimeout);
-import { writeFile, mkdir } from 'fs/promises';
-import * as fs from 'fs';
 import axios from 'axios';
-import FormData from 'form-data';
-import uploadImage from '../lib/uploadImage.js';
+import { MIMEType, promisify } from 'util';
+const sleep = promisify(setTimeout);
+import * as fs from 'fs';
 
 
 
@@ -20,57 +17,39 @@ const apiXterm = {
 
 
 export default async function Downloadplugin(msg, url, type, client) {
-    if (type === "tt") {
+    if (type.includes('tt')) {
         try {
             await msg.reply("Processing....")
             let result = await downloadvid(url, type);
             if (!result.status) return msg.reply(result.msg);
             
             const mp4HD = await result?.data?.media?.find(media => media.description === "Download MP4 [1]")?.url;
-            //console.log(mp4HD);
-            //const response = await fetch(mp4HD);
-            //if (!response.ok) throw new Error(`Gagal mengambil video: ${response.statusText}`);
-
-            //const buffer = await response.buffer();
-            //const filePath = "./temp/video.mp4";
-            //fs.writeFileSync(filePath, buffer);
-
-        // const enhanceMedia = new MessageMedia('video/mp4', buffer.toString('base64'));
             const media = await MessageMedia.fromUrl(mp4HD, { unsafeMime: true });
-            //console.log(media.mimetype);
-            await client.sendMessage(msg.from, media, { caption: `✨ Ini hasil video dari link!`, sendMediaAsDocument: true});
-            //fs.unlinkSync(filePath);
+            await client.sendMessage(msg.from, media, { caption: `✨ Ini hasil video dari link!`});
         } catch (error) {
-            //const filePath = "./temp/video.mp4";
             console.error("❌ Error dalam handleImageUpscale:", error);
             msg.reply("⚠️ Terjadi kesalahan dalam memproses link.");
-            //fs.unlinkSync(filePath);
         }
-    } else if (type === "ig") {
+    } else if (type.includes('ig')) {
         try {
             await msg.reply("Processing....")
             let result = await downloadvid(url, type);
             if (!result.status) return msg.reply(result.msg);
             
             const mp4HD = await result.data.content[0].url
-            //console.log(mp4HD);
-            const response = await fetch(mp4HD);
-            if (!response.ok) throw new Error(`Gagal mengambil video: ${response.statusText}`);
+            const response = await axios.get(mp4HD, {
+                responseType: 'arraybuffer',
+                });
 
-            const buffer = await response.buffer();
-            const filePath = "./temp/video.mp4";
-            fs.writeFileSync(filePath, buffer);
-
-        // const enhanceMedia = new MessageMedia('video/mp4', buffer.toString('base64'));
-            const media = await MessageMedia.fromFilePath("./temp/video.mp4");
-            //console.log(media.mimetype);
-            await client.sendMessage(msg.from, media, { caption: `✨ Ini hasil video dari link!`, sendMediaAsDocument: true});
-            fs.unlinkSync(filePath);
+                const media = new MessageMedia(
+                'video/mp4', // Force MIME type
+                Buffer.from(response.data, 'binary').toString('base64'),
+                'video.mp4' // Nama file saat dikirim
+                );
+            await client.sendMessage(msg.from, media, { caption: `✨ Ini hasil video dari link!`, });
         } catch (error) {
-            const filePath = "./temp/video.mp4";
             console.error("❌ Error dalam handleImageUpscale:", error);
             msg.reply("⚠️ Terjadi kesalahan dalam memproses link.");
-            fs.unlinkSync(filePath);
         }
     } else if (!["tt","ig"].includes(type)) {
         msg.reply("type atau link yang kamu masukan salah!")
