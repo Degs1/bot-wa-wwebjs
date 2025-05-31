@@ -7,7 +7,7 @@ const apiXterm = {
 };
 
 async function downloadvid(vidurl, type) {
-    if (type === "tt") {
+    if (type.includes('tt')) {
         try {
             const fetch = (await import('node-fetch')).default; // Gunakan dynamic import
         
@@ -25,7 +25,7 @@ async function downloadvid(vidurl, type) {
         } catch (error) {
             return { status: false, msg: "terjadi keslahan dalam memproses." };
         }
-    } else if  (type === "ig") {
+    } else if  (type.includes('ig')) {
         try {
             const fetch = (await import('node-fetch')).default; // Gunakan dynamic import
         
