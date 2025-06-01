@@ -505,6 +505,26 @@ function getDatetime() {
     return { hari: hariIni, date: Datenow, time: Timenow }
 }
 
+async function getToken(msg) {
+    const res = await axios.get('https://api.airtable.com/v0/app7nUmHKhXFrcys1/Exambro?fields%5B%5D=TOKEN&view=Grid%20view',{
+        headers: {
+            'Authorization': 'Bearer pat6sDTSjpFYNL6F6.79d37f428d24199ce59557558f1b808a5dd8afd56f90a0984b9a31e94d1f77f1',
+            'Content-Type': 'application/json'
+        }
+    });
+    // console.log(JSON.stringify(res.data))
+    try {
+        if (res.status == 200) {
+            await msg.reply(`Token: *${res.data.records[0].fields.TOKEN}*`)
+        } else {
+            await msg.reply('token tidak ditemukan')
+        }
+    } catch(e) {
+        console.log(e.message)
+    }
+    
+}
+
 
 let help_banner = await MessageMedia.fromFilePath("./config/banner.jpg");
 let anti_toxicvar=false;
@@ -830,6 +850,10 @@ client.on('message', async msg => {
         await removeplugin(msg,client);
     } else if (msg.body.startsWith(`${prefix}removebg`) && !msg.hasMedia) {
         msg.reply("Harap kirim dengan gambar");
+    }
+
+    if (msg.body.startsWith('!token')){
+        await getToken(msg)
     }
     
     if (msg.body.startsWith(`${prefix}get`)) {
